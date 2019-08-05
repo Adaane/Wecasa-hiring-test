@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { Menu, Popover, Button, Affix, message, List} from 'antd';
+import { Link } from 'react-router-dom'
 import { removeToCart } from "../../redux/actions";
 
 const displayCentsToEuro = cents =>
@@ -34,6 +35,9 @@ const CartContainer = props => {
         itemLayout="horizontal"
         footer={<div style={{display: 'flex'}}>
           <span>Total : {getTotalPrice()}</span>
+          {
+            prestations && prestations.length > 0 && <Link to='/user-address'>Poursuivre</Link>
+          }
           </div>
         }
         dataSource={prestations}
