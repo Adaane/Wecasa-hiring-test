@@ -4,7 +4,7 @@ import Page from './page'
 import { Row, Col } from 'antd';
 import { Collapse, Icon, Select, Table, Divider, Tag  } from 'antd';
 import PrestationsContainer from '../components/Prestations/prestationsContainer';
-import { CartContainer } from "../components/Cart/cartContainer";
+import CartContainer from "../components/Cart/cartContainer";
 
 const { Column, ColumnGroup } = Table;
 const { Panel } = Collapse;
