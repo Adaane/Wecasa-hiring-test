@@ -1,16 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { Collapse, Select, Table, Divider, Tag } from 'antd';
-import { Row, Col, Layout, Menu, Icon } from 'antd';
+import { Collapse, Select, Table } from 'antd';
 import { addToCart } from "../../redux/actions";
 
 
 
 var ID = function () {
-  // Math.random should be unique because of its seeding algorithm.
-  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
-  // after the decimal.
   return '_' + Math.random().toString(36).substr(2, 9);
 };
 
@@ -50,7 +46,8 @@ const PrestationsContainer = props => {
         return [...acc, {
           ...curr,
           'duration': convertMinutesToHours(curr.duration),
-          'price': displayCentsToEuro(curr.price)
+          'priceCurrency': displayCentsToEuro(curr.price),
+          'priceNumber': curr.price
         }]
       }, [])
   }
@@ -78,7 +75,7 @@ const PrestationsContainer = props => {
               <Table dataSource={categoryTable('man')}>
                 <Column title="Prestation" dataIndex="title" key="title" />
                 <Column title="Durée de la prestation" dataIndex="duration" key="duration" />
-                <Column title="Prix" dataIndex="price" key="price" />
+                <Column title="Prix" dataIndex="priceCurrency" key="priceCurrency" />
                 <Column
                   title="Action"
                   key="action"
@@ -96,7 +93,7 @@ const PrestationsContainer = props => {
               <Table dataSource={categoryTable('woman')}>
                 <Column title="Prestation" dataIndex="title" key="title" />
                 <Column title="Durée" dataIndex="duration" key="duration" />
-                <Column title="Prix" dataIndex="price" key="price" />
+                <Column title="Prix" dataIndex="priceCurrency" key="priceCurrency" />
                 <Column
                   title="Action"
                   key="action"
@@ -114,7 +111,7 @@ const PrestationsContainer = props => {
               <Table dataSource={categoryTable('child')}>
                 <Column title="Prestation" dataIndex="title" key="title" />
                 <Column title="Durée" dataIndex="duration" key="duration" />
-                <Column title="Prix" dataIndex="price" key="price" />
+                <Column title="Prix" dataIndex="priceCurrency" key="priceCurrency" />
                 <Column
                   title="Action"
                   key="action"

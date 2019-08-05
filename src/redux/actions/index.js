@@ -6,7 +6,6 @@ export const fetchAllPrestations = () => dispatch => {
   getUniverse()
   .then(data => 
     { 
-    console.log('data', data);
       dispatch(receivePrestations(data))
   }).catch(error => {
       dispatch(requestPrestationsError(error));
@@ -29,4 +28,9 @@ export const addToCart = prestation => ({
   prestation
 })
 
+//REMOVETOCART
+export const removeToCart = prestationId => ({
+  type: types.REMOVE_TO_CART,
+  prestationId
+})
 

@@ -3,15 +3,29 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { Menu, Popover, Button, Affix, message, List} from 'antd';
+import { removeToCart } from "../../redux/actions";
 
+const displayCentsToEuro = cents =>
+  (cents / 100).toLocaleString("fr", { style: "currency", currency: "EUR" });
 
 const CartContainer = props => {
   const [isVisible, setVisible] = useState(false)
 
-  const {prestations} = props
+  const { prestations, removeToCart} = props
 
   const handleVisibleChange = (visible) => {
     setVisible(visible)
+  }
+
+  const onRemove = (item) => {
+    removeToCart(item.id)
+  }
+
+  const getTotalPrice = () => {
+    return displayCentsToEuro(prestations && prestations.reduce((acc, curr) => {
+      return acc + curr.priceNumber
+    }, 0))
+ 
   }
 
   const content =
@@ -19,15 +33,17 @@ const CartContainer = props => {
       <List
         itemLayout="horizontal"
         footer={<div style={{display: 'flex'}}>
-          <span>Total : </span>
+          <span>Total : {getTotalPrice()}</span>
           </div>
         }
         dataSource={prestations}
         renderItem={item => (
-          <List.Item>
+          <List.Item
+            actions={[<a onClick={() => onRemove(item)}>Retirer du panier</a>]}
+          >
             <List.Item.Meta
               title={<a href="https://ant.design">{item.title}</a>}
-              description={`${item.price} | ${item.duration}`}
+              description={`${item.priceCurrency} | ${item.duration}`}
             />
           </List.Item>
         )} />
@@ -62,4 +78,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
+  { removeToCart }
 )(CartContainer)
