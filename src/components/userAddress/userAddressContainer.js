@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Script from 'react-load-script';
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
+import { Link } from 'react-router-dom'
+
 
 const API_KEY = "AIzaSyBVB4oxTZoBpcvt3NbYIHQVLqhAmfuaioE"
 
@@ -35,7 +37,7 @@ const UserAddressContainer = props => {
 
 
   return (
-    <div>
+    <>
       <Script url={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`}
         onLoad={handleScriptLoad}
       /> 
@@ -47,7 +49,8 @@ const UserAddressContainer = props => {
         hintText="Search City"
         value={query}
         type="text" />
-    </div>
+      {query && <Link to='/'><Button type="primary">Suivant</Button></Link> }
+    </>
   );
 };
 
