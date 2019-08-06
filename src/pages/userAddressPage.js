@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Page from './page'
-import { Row, Col } from 'antd';
-import PrestationsContainer from '../components/Prestations/prestationsContainer';
-import CartContainer from "../components/Cart/cartContainer";
+import { Row, Col, Steps } from 'antd';
+import UserAddressContainer from '../components/userAddress/userAddressContainer';
+
+const { Step } = Steps;
+
 
 function callback(key) {
   console.log(key);
@@ -15,8 +17,17 @@ const UserAddressPage = props => {
       <div className="gutter-example">
         <Row gutter={24}>
           <Col>
+            <Steps size="small" current={1}>
+              <Step title="Prestations" />
+              <Step title="Adresse" />
+              <Step title="Horraires" />
+            </Steps>
+          </Col>
+        </Row>
+        <Row gutter={24}>
+          <Col>
             {'Veuillez entrer votre adresse :'}
-            {/* <UserAddressContainer /> */}
+            <UserAddressContainer />
           </Col>
         </Row>
       </div>
