@@ -34,3 +34,17 @@ export const removeToCart = prestationId => ({
   prestationId
 })
 
+//ADDRESS
+
+export const addUserAddress = userAddress => ({
+    type: types.ADD_USER_ADDRESS,
+    userAddress
+})
+
+//APPOINTEMENT
+export const addAppointmentDate = appointment => ({
+  type: types.ADD_APPOINTMENT_DATE,
+  appointment
+})
+
+

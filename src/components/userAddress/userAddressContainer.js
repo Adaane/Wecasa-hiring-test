@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Script from 'react-load-script';
 import { Input, Button } from 'antd';
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { addUserAddress } from '../../redux/actions';
 
 
 const API_KEY = "AIzaSyBVB4oxTZoBpcvt3NbYIHQVLqhAmfuaioE"
@@ -12,6 +14,9 @@ const UserAddressContainer = props => {
   const [query, setQuery] = useState('')
 
   let autocomplete = ""
+
+  const { addUserAddress } = props
+
 
   const handleScriptLoad = () => {
     // Declare Options For Autocomplete 
@@ -34,7 +39,9 @@ const UserAddressContainer = props => {
     setQuery(e.target.value)
   }
 
-
+  const handleClick = () => (
+    addUserAddress(query)
+  )
 
   return (
     <>
@@ -49,7 +56,9 @@ const UserAddressContainer = props => {
         hintText="Search City"
         value={query}
         type="text" />
-      {query && <Link to='/'><Button type="primary">Suivant</Button></Link> }
+      {query && <Link to={'/appointement'}>
+        <Button type="primary" onClick={() => handleClick()}>Suivant</Button>
+        </Link> }
     </>
   );
 };
@@ -58,4 +67,12 @@ UserAddressContainer.propTypes = {
   
 };
 
-export default UserAddressContainer;
+const mapStateToProps = state => ({
+  prestations: state.cart
+})
+
+
+export default connect(
+  mapStateToProps,
+  {addUserAddress}
+)(UserAddressContainer)

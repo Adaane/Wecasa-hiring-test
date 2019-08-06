@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Spin } from 'antd';
 
-import { Home, PrestationsPage, ErrorPageWrapper, UserAddressPage} from './routes'
+import { Home, PrestationsPage, ErrorPageWrapper, UserAddressPage, AppointmentPage} from './routes'
 import { getAllprestation } from "../src/api";
 
 function App() {
@@ -15,6 +15,10 @@ function App() {
           <Spin tip="Loading..."/>
           }>
         <Switch>
+            <Route
+              path="/appointment"
+              component={props => <AppointmentPage {...props} />}
+            />
             <Route
               path="/user-address"
               component={props => <UserAddressPage {...props} />}
