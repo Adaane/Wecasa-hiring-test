@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Page from './page'
 import { Row, Col, Steps } from 'antd';
-import PrestationsContainer from '../components/Prestations/prestationsContainer';
-import CartContainer from "../components/Cart/cartContainer";
+import BookingRecapContainer from '../components/BookingRecap/bookingRecapContainer';
 
 const { Step } = Steps;
 
@@ -12,11 +11,11 @@ function callback(key) {
   console.log(key);
 }
 
-const PrestationsPage = props => {
+const BookingConfirmationPage = props => {
   return (
     <Page>
       <div className="gutter-example">
-        <Steps size="small" current={0}>
+        <Steps size="small" current={3}>
           <Step title="Prestations" />
           <Step title="Adresse" />
           <Step title="Horraires" />
@@ -24,11 +23,10 @@ const PrestationsPage = props => {
         </Steps>
         <Row gutter={24}>
           <Col>
-          {'Choix des prestations :'}
-            <PrestationsContainer/>
+          {'Récapitulatif de la Réservation:'}
+          <BookingRecapContainer/>
           </Col>
           <Col>
-            <CartContainer />
           </Col>
         </Row>
       </div>
@@ -36,8 +34,8 @@ const PrestationsPage = props => {
   );
 };
 
-PrestationsPage.propTypes = {
+BookingConfirmationPage.propTypes = {
   
 };
 
-export default PrestationsPage;
+export default BookingConfirmationPage;

@@ -13,7 +13,7 @@ const Home = props => {
         <Row gutter={16}>
           <Col className="gutter-row" span={6}>
             <div className="gutter-box" style={{ background: 'grey' }}>
-              <Link to="/prestationsList">{'Coiffure'}</Link>
+              <Link to="/step/prestationsList">{'Coiffure'}</Link>
             </div>
           </Col>
         </Row>

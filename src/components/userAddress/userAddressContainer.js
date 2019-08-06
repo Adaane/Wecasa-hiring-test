@@ -56,7 +56,7 @@ const UserAddressContainer = props => {
         hintText="Search City"
         value={query}
         type="text" />
-      {query && <Link to={'/appointement'}>
+      {query && <Link to={'/step/appointment'}>
         <Button type="primary" onClick={() => handleClick()}>Suivant</Button>
         </Link> }
     </>

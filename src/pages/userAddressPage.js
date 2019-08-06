@@ -17,11 +17,12 @@ const UserAddressPage = props => {
       <div className="gutter-example">
         <Row gutter={24}>
           <Col>
-            <Steps size="small" current={1}>
-              <Step title="Prestations" />
-              <Step title="Adresse" />
-              <Step title="Horraires" />
-            </Steps>
+        <Steps size="small" current={2}>
+          <Step title="Prestations" />
+          <Step title="Adresse" />
+          <Step title="Horraires" />
+          <Step title="Confirmation" />
+        </Steps>
           </Col>
         </Row>
         <Row gutter={24}>

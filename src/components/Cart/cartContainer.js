@@ -36,7 +36,7 @@ const CartContainer = props => {
         footer={<div style={{display: 'flex'}}>
           <span>Total : {getTotalPrice()}</span>
           {
-            prestations && prestations.length > 0 && <Link to='/user-address'>Poursuivre</Link>
+            prestations && prestations.length > 0 && <Link to='/step/user-address'>Poursuivre</Link>
           }
           </div>
         }

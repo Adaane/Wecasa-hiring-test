@@ -1,4 +1,4 @@
-import { getUniverse } from '../../api'
+import { getUniverse, sendBookingRequest } from '../../api'
 import * as types from '../constants/ActionTypes'
 
 
@@ -46,5 +46,38 @@ export const addAppointmentDate = appointment => ({
   type: types.ADD_APPOINTMENT_DATE,
   appointment
 })
+
+//BookingRequest 
+
+export const bookingRequester = payload => dispatch => {
+  dispatch(bookingRequest(payload))
+  sendBookingRequest(payload)
+    .then(data => {
+      dispatch(bookingRequestSuccess(data))
+      console.log('success')
+    })
+    .catch(error => {
+      dispatch(bookingRequestError(error));
+      console.log('error')
+
+    });
+}
+
+
+export const bookingRequest = data => ({
+  type: types.BOOKING_REQUEST,
+  data
+})
+
+const bookingRequestSuccess = data => ({
+  type: types.BOOKING_REQUEST_SUCCESS,
+  data
+})
+
+const bookingRequestError = data => ({
+  type: types.BOOKING_REQUEST_ERROR,
+  data
+})
+
 
 

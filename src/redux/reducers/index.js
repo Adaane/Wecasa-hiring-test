@@ -53,7 +53,6 @@ const user = (state = initialState.user, action) => {
 }
 
 const appointment = (state = initialState.appointment, action) => {
-  
     switch (action.type) {
     case ADD_APPOINTMENT_DATE:
       return action.appointment
@@ -61,6 +60,7 @@ const appointment = (state = initialState.appointment, action) => {
       return state
   }
 }
+
 
 
 

@@ -48,9 +48,11 @@ const AppointmentContainer = props => {
         />
     </div>
     {
-      startDate && <Button type="primary" onClick={() => handleClick()}>
+      startDate && <Link to="/step/bookingConfirmation">
+      <Button type="primary" onClick={() => handleClick()}>
       {"Suivant"}
     </Button>
+    </Link>
     }
 
     </>
