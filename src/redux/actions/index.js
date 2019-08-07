@@ -21,14 +21,13 @@ export const requestPrestationsError = () => ({
     type: types.REQUEST_PRESTATIONS_ERROR
 });
 
-//ADDTOCART
+//CART
 
 export const addToCart = prestation => ({
   type: types.ADD_TO_CART,
   prestation
 })
 
-//REMOVETOCART
 export const removeToCart = prestationId => ({
   type: types.REMOVE_TO_CART,
   prestationId
@@ -52,14 +51,17 @@ export const addAppointmentDate = appointment => ({
 export const bookingRequester = payload => dispatch => {
   dispatch(bookingRequest(payload))
   sendBookingRequest(payload)
-    .then(data => {
-      dispatch(bookingRequestSuccess(data))
-      console.log('success')
+    .then(res => {
+      console.log('res', res);
+      if (res.statusCode === 200) {
+        dispatch(bookingRequestSuccess(res))
+      }
+      if (res.statusCode === 500) {
+        dispatch(bookingRequestError(res));
+      }
     })
     .catch(error => {
       dispatch(bookingRequestError(error));
-      console.log('error')
-
     });
 }
 
@@ -74,9 +76,8 @@ const bookingRequestSuccess = data => ({
   data
 })
 
-const bookingRequestError = data => ({
-  type: types.BOOKING_REQUEST_ERROR,
-  data
+const bookingRequestError = () => ({
+  type: types.BOOKING_REQUEST_ERROR
 })
 
 

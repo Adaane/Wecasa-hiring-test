@@ -1,21 +1,16 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import Script from 'react-load-script';
-import { Input, Button } from 'antd';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+
+import UserAdressInput from "./userAdressInput";
 import { addUserAddress } from '../../redux/actions';
-
-
-const API_KEY = "AIzaSyBVB4oxTZoBpcvt3NbYIHQVLqhAmfuaioE"
 
 const UserAddressContainer = props => {
 
   const [query, setQuery] = useState('')
+  const { addUserAddress } = props
 
   let autocomplete = ""
-
-  const { addUserAddress } = props
 
 
   const handleScriptLoad = () => {
@@ -44,27 +39,16 @@ const UserAddressContainer = props => {
   )
 
   return (
-    <>
-      <Script url={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`}
-        onLoad={handleScriptLoad}
-      /> 
-      <Input placeholder="Rechercher une adresse" 
-        allowClear 
-        onChange={handleChange}
-        className="input-field"
-        id="autocomplete"
-        hintText="Search City"
-        value={query}
-        type="text" />
-      {query && <Link to={'/step/appointment'}>
-        <Button type="primary" onClick={() => handleClick()}>Suivant</Button>
-        </Link> }
-    </>
+    <UserAdressInput onScriptLoad={handleScriptLoad}
+      onInputChange={handleChange}
+      onBtnClick={handleClick}
+      query={query}
+    />
   );
 };
 
 UserAddressContainer.propTypes = {
-  
+  addUserAddress: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

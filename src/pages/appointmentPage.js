@@ -1,35 +1,21 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Col } from 'antd';
+
 import Page from './page'
-import { Row, Col, Steps } from 'antd';
+import CartContainer from "../components/Cart/cartContainer";
 import AppointmentContainer from '../components/Appointment/appointmentContainer';
 
 
-const { Step } = Steps;
-
-
-const AppointmentPage = props => {
-  return (
-    <Page>
-      <div className="gutter-example">
-        <Steps size="small" current={0}>
-          <Step title="Prestations" />
-          <Step title="Adresse" />
-          <Step title="Horraires" />
-        </Steps>
-        <Row gutter={24}>
-          <Col>
-          {'Choix des dates :'}
-          <AppointmentContainer />
-          </Col>
-        </Row>
-      </div>
+const AppointmentPage = () => (
+    <Page step={2}>
+      <Col style={{ height: '100vh' }}>
+        <p>{'Choix des dates :'}</p>
+        <AppointmentContainer />
+      </Col>
+      <Col>
+        <CartContainer />
+      </Col>
     </Page>
-  );
-};
-
-AppointmentPage.propTypes = {
-
-};
+  )
 
 export default AppointmentPage;

@@ -2,17 +2,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { Menu, Popover, Button, Affix, message, List} from 'antd';
-import { Link } from 'react-router-dom'
+import { Popover, Button, Affix} from 'antd';
 import { removeToCart } from "../../redux/actions";
+import CartList from "./cartList";
 
-const displayCentsToEuro = cents =>
-  (cents / 100).toLocaleString("fr", { style: "currency", currency: "EUR" });
+const CartContainer = ({ prestations, removeToCart }) => {
 
-const CartContainer = props => {
   const [isVisible, setVisible] = useState(false)
-
-  const { prestations, removeToCart} = props
 
   const handleVisibleChange = (visible) => {
     setVisible(visible)
@@ -22,37 +18,7 @@ const CartContainer = props => {
     removeToCart(item.id)
   }
 
-  const getTotalPrice = () => {
-    return displayCentsToEuro(prestations && prestations.reduce((acc, curr) => {
-      return acc + curr.priceNumber
-    }, 0))
- 
-  }
-
-  const content =
-    <>
-      <List
-        itemLayout="horizontal"
-        footer={<div style={{display: 'flex'}}>
-          <span>Total : {getTotalPrice()}</span>
-          {
-            prestations && prestations.length > 0 && <Link to='/step/user-address'>Poursuivre</Link>
-          }
-          </div>
-        }
-        dataSource={prestations}
-        renderItem={item => (
-          <List.Item
-            actions={[<a onClick={() => onRemove(item)}>Retirer du panier</a>]}
-          >
-            <List.Item.Meta
-              title={<a href="https://ant.design">{item.title}</a>}
-              description={`${item.priceCurrency} | ${item.duration}`}
-            />
-          </List.Item>
-        )} />
-    </>
-
+  const content = <CartList list={prestations} onRemovePrestation={onRemove}/>
 
   return (
     <div>
@@ -60,7 +26,7 @@ const CartContainer = props => {
         <Popover
           content={content}
           trigger="click"
-          title={`Mon panier ${(prestations.length)}`}
+          title={`Mon panier : ${(prestations.length)} élément(s)`}
           visible={isVisible}
           onVisibleChange={handleVisibleChange}
         >
@@ -72,7 +38,8 @@ const CartContainer = props => {
 };
 
 CartContainer.propTypes = {
-  
+  prestations: PropTypes.array.isRequired,
+  removeToCart: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

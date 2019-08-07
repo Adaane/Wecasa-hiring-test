@@ -1,29 +1,18 @@
 import React, {useState} from 'react';
-import DatePicker, { registerLocale } from "react-datepicker";
 import PropTypes from 'prop-types';
-import Script from 'react-load-script';
-import { Input, Button } from 'antd';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {addAppointmentDate} from '../../redux/actions'
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Button } from 'antd';
 
+import CustomInput from "./customInput"
+import {addAppointmentDate} from '../../redux/actions'
 
-const CustomInput = props => {
-
- 
-  return (
-    <Button
-      className="example-custom-input"
-      onClick={props.onClick}>
-      {props.value ? props.value : "Séléctionner une date"}
-    </Button>
-  )
-}
 
 const AppointmentContainer = props => {
-   const {addAppointmentDate} = props
   const [startDate, setStartDate] = useState(null)
+  const { addAppointmentDate } = props
 
   const handleChange = (date) => {
     setStartDate(date)
@@ -35,7 +24,6 @@ const AppointmentContainer = props => {
 
   return (
     <>
-    <div>
       <DatePicker
         customInput={<CustomInput/>}
         selected={startDate}
@@ -46,21 +34,22 @@ const AppointmentContainer = props => {
         todayButton={"Aujourd'hui"}
         minDate={new Date()}
         />
-    </div>
-    {
-      startDate && <Link to="/step/bookingConfirmation">
-      <Button type="primary" onClick={() => handleClick()}>
-      {"Suivant"}
-    </Button>
-    </Link>
-    }
-
+      {
+        startDate && 
+        <div style={{'marginTop': 20}}>
+          <Link to="/step/bookingConfirmation">
+            <Button type="primary" onClick={() => handleClick()}>
+              {"Suivant"}
+            </Button>
+          </Link>
+        </div>
+      }
     </>
   );
 };
 
 AppointmentContainer.propTypes = {
-  
+  addAppointmentDate: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

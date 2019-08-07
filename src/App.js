@@ -1,11 +1,14 @@
 import React, { Suspense } from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import logo from './logo.svg';
-import './App.css';
 import { Spin } from 'antd';
+import './App.css';
 
-import { Home, PrestationsPage, ErrorPageWrapper, UserAddressPage, AppointmentPage, BookingConfirmationPage} from './routes'
-import { getAllprestation } from "../src/api";
+import { Home,
+  PrestationsPage,
+  ErrorPageWrapper,
+  UserAddressPage,
+  AppointmentPage,
+  BookingConfirmationPage} from './routes'
 
 function App() {
   return (

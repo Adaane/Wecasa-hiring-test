@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Page from './page'
 import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom'
 
 
 
-const Home = props => {
+const Home = () => {
   return (
     <Page>
       <div className="gutter-example">
