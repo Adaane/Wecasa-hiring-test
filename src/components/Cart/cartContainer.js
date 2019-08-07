@@ -2,37 +2,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { Menu, Popover, Button, Affix, message, List} from 'antd';
+import { Popover, Button, Affix} from 'antd';
+import { removeToCart } from "../../redux/actions";
+import CartList from "./cartList";
 
+const CartContainer = ({ prestations, removeToCart }) => {
 
-const CartContainer = props => {
   const [isVisible, setVisible] = useState(false)
-
-  const {prestations} = props
 
   const handleVisibleChange = (visible) => {
     setVisible(visible)
   }
 
-  const content =
-    <>
-      <List
-        itemLayout="horizontal"
-        footer={<div style={{display: 'flex'}}>
-          <span>Total : </span>
-          </div>
-        }
-        dataSource={prestations}
-        renderItem={item => (
-          <List.Item>
-            <List.Item.Meta
-              title={<a href="https://ant.design">{item.title}</a>}
-              description={`${item.price} | ${item.duration}`}
-            />
-          </List.Item>
-        )} />
-    </>
+  const onRemove = (item) => {
+    removeToCart(item.id)
+  }
 
+  const content = <CartList list={prestations} onRemovePrestation={onRemove}/>
 
   return (
     <div>
@@ -40,7 +26,7 @@ const CartContainer = props => {
         <Popover
           content={content}
           trigger="click"
-          title={`Mon panier ${(prestations.length)}`}
+          title={`Mon panier : ${(prestations.length)} élément(s)`}
           visible={isVisible}
           onVisibleChange={handleVisibleChange}
         >
@@ -52,7 +38,8 @@ const CartContainer = props => {
 };
 
 CartContainer.propTypes = {
-  
+  prestations: PropTypes.array.isRequired,
+  removeToCart: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -62,4 +49,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
+  { removeToCart }
 )(CartContainer)

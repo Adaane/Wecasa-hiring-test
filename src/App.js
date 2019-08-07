@@ -1,11 +1,14 @@
 import React, { Suspense } from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import logo from './logo.svg';
-import './App.css';
 import { Spin } from 'antd';
+import './App.css';
 
-import { Home, PrestationsPage, ErrorPageWrapper } from './routes'
-import { getAllprestation } from "../src/api";
+import { Home,
+  PrestationsPage,
+  ErrorPageWrapper,
+  UserAddressPage,
+  AppointmentPage,
+  BookingConfirmationPage} from './routes'
 
 function App() {
   return (
@@ -16,7 +19,19 @@ function App() {
           }>
         <Switch>
             <Route
-              path="/prestationsList"
+              path="/step/bookingConfirmation"
+              component={props => <BookingConfirmationPage {...props} />}
+            />
+            <Route
+              path="/step/appointment"
+              component={props => <AppointmentPage {...props} />}
+            />
+            <Route
+              path="/step/user-address"
+              component={props => <UserAddressPage {...props} />}
+            />
+            <Route
+              path="/step/prestationsList"
               component={props => <PrestationsPage {...props} />}
             />
             <Route

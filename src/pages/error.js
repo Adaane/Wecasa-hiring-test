@@ -10,7 +10,7 @@ const ErrorPageWrapper = () => {
       <div className="gutter-example">
         <Row gutter={16}>
           <Col className="gutter-row" span={6}>
-            {'EERRRROOOORRRRR'}
+            {'Error 404'}
           </Col>
         </Row>
       </div>
