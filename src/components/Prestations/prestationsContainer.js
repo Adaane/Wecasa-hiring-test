@@ -13,7 +13,6 @@ const PrestationsContainer = ({ addToCart, prestations }) => {
   const [key, setKey] = useState('man')
 
   const onTabChange = (key, type) => {
-    console.log(key, type);
     setKey(key);
   };
 

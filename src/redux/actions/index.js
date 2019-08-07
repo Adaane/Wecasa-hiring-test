@@ -52,7 +52,6 @@ export const bookingRequester = payload => dispatch => {
   dispatch(bookingRequest(payload))
   sendBookingRequest(payload)
     .then(res => {
-      console.log('res', res);
       if (res.statusCode === 200) {
         dispatch(bookingRequestSuccess(res))
       }

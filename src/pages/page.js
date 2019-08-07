@@ -9,8 +9,6 @@ const { Step } = Steps;
 
 
 const Page = ({ children, step }) => {
-  console.log('step', step);
-
     return (<Layout>
       <Sider trigger={null} style={{
         overflow: 'auto',
